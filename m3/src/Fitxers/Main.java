@@ -1,0 +1,77 @@
+package Fitxers;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) throws FileNotFoundException, IOException {
+		Scanner scanner = new Scanner(System.in);
+		Concessionaris con1 = new Concessionaris();
+
+		/*
+		 * // ------------EXERCICI-1----------- Ex1.LeerFitxero(scanner);
+		 * Ex1.suma(scanner);
+		 */
+
+		boolean salir = false;
+		int options;
+		int v[] = new int[5];
+
+		while (salir != true) {
+			System.out.println(" ");
+			System.out.println("1 - Carregar vehicles des d'un fitxer CSV");
+			System.out.println("2 - Carregar vehicles des d'un fitxer XML");
+			System.out.println("3 - Mostrar la llista de vehicles");
+			System.out.println("4 - Afegir un vehicle");
+			System.out.println("5 - Treure un vehicle (Per matrícula)");
+			System.out.println("6 - Quin és el cotxe amb més quilòmetres");
+			System.out.println("7 - Desar els vehicles a un fitxer CSV");
+			System.out.println("8 - Desar els vehicles a un fitxer XML");
+			System.out.println("9 - Eliminar la lista y cargar de nuevo");
+			System.out.println("0 - Salir");
+			System.out.print("\nEscribe tu opción: ");
+			options = scanner.nextInt();
+
+			switch (options) {
+			case 1:
+				System.out.print("Introdueix el nom del fitxer: ");
+				String nomFitxer = scanner.nextLine();
+				try {
+					con1.LeerFitxero(nomFitxer);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (MatriculaInvalidaException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
+			case 2:
+
+				break;
+			case 3:
+				System.out.println("");
+				System.out.println("------LA LLISTA DE VEHICLES----");
+				con1.mostrarVehicles();
+				break;
+			case 8:
+				con1.guardarXML(); // Convierte el archivo .txt a un archivo xml
+				break;
+			case 0:
+				salir = true;
+				break;
+
+			default:
+				System.out.println("Opción incorrecta. Elige entre 1 - 8.");
+				break;
+
+			}
+
+		}
+	}
+}
