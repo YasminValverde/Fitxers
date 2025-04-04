@@ -33,6 +33,7 @@ public class Main {
 			System.out.println("0 - Salir");
 			System.out.print("\nEscribe tu opción: ");
 			options = scanner.nextInt();
+			scanner.nextLine();
 
 			switch (options) {
 			case 1:
@@ -41,13 +42,10 @@ public class Main {
 				try {
 					con1.LeerFitxero(nomFitxer);
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (MatriculaInvalidaException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				break;
@@ -58,6 +56,33 @@ public class Main {
 				System.out.println("");
 				System.out.println("------LA LLISTA DE VEHICLES----");
 				con1.mostrarVehicles();
+				break;
+			case 4:
+				System.out.println("Introduce los datos[matricula, km, es classic? / cilindrada]");
+				String datos = scanner.nextLine();
+				try {
+					con1.añadirVehiculoPorTeclado(datos);
+				} catch (MatriculaInvalidaException e) {
+					e.printStackTrace();
+				}
+				break;
+			case 5:
+				System.out.println("Introduce la matricula del vehiculo que quieres eliminar: ");
+				String matricula = scanner.nextLine();
+				if (!con1.quitarVehiculo(matricula)) {
+					System.out.println("NO SE PUEDE ELIMINAR ESE VEHICULO!NO EXISTE!!");
+
+				} else {
+					System.out.println("Vehiculo con matricula " + matricula + " fue eliminado correctamente!");
+				}
+
+				break;
+			case 6:
+				System.out.println("El cotxe con mas km es: " + con1.cotxeMesKM());
+				break;
+
+			case 7:
+				con1.guardarXML(); // Deja la lista
 				break;
 			case 8:
 				con1.guardarXML(); // Convierte el archivo .txt a un archivo xml

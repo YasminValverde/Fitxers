@@ -56,11 +56,6 @@ public class Concessionaris {
 		return vehicles.add(vehicle);
 	}
 
-	public boolean treureVehicle(Vehicles v) {
-		return vehicles.remove(v);
-
-	}
-
 	// ------------Conèixer el nombre de vehicles dels concessionaris-----------//
 
 	public int obtenirNumVehicles() {
@@ -140,10 +135,72 @@ public class Concessionaris {
 
 		try (XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(nomFitxer + ".xml")))) {
 			encoder.writeObject(this.vehicles); // Guarda el objeto Concessionaris completo
-			System.out.println("Concesionario guardado en " + nomFitxer + ".xml correctamente.");
+			System.out.println("Lista  guardada en " + nomFitxer + ".xml correctamente.");
 		} catch (IOException e) {
 			System.out.println("Error al guardar el archivo XML: " + e.getMessage());
 		}
+	}
+
+	public void guardarCSV() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Introduce el nombre del archivo XML: ");
+		String nomFitxer = scanner.nextLine();
+		try (XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(nomFitxer + ".xml")))) {
+			encoder.writeObject(this.vehicles); // Guarda el objeto Concessionaris completo
+			System.out.println("Lista  guardada en " + nomFitxer + ".xml correctamente.");
+		} catch (IOException e) {
+			System.out.println("Error al guardar el archivo XML: " + e.getMessage());
+		}
+
+	}
+
+	public Cotxes cotxeMesKM() {
+		Cotxes mesUtilitzat = null;
+		// Recorremos todos los vehículos de la lista 'vehicles'
+		for (Vehicles v : vehicles) {
+			// Comprobamos si el vehículo actual es un objeto de tipo 'Cotxes'
+			if (v instanceof Cotxes) {
+				Cotxes c = (Cotxes) v;
+				// Si aún no hemos asignado ningún coche o si el coche actual tiene más km que
+				// el guardado
+				if (mesUtilitzat == null || c.getKm() > mesUtilitzat.getKm()) {
+					mesUtilitzat = c;
+				}
+			}
+		}
+		return mesUtilitzat;
+	}
+
+	public boolean quitarVehiculo(String matricula) {
+		for (Vehicles v : vehicles) {
+			if (v.getMatricula().equalsIgnoreCase(matricula)) {
+				return vehicles.remove(v);
+			}
+		}
+		return false;
+	}
+
+	public boolean añadirVehiculoPorTeclado(String datos) throws MatriculaInvalidaException {
+		String[] parts = datos.split(";");
+		String matricula = parts[0].trim();
+		String km = parts[1].trim();
+		String dato = parts[2].trim();
+		int KM = Integer.parseInt(km);
+
+		if (dato.equalsIgnoreCase("false") | dato.equalsIgnoreCase("true")) {
+			boolean classic = Boolean.parseBoolean(dato);
+			Cotxes c4 = new Cotxes(matricula, KM, classic);
+			System.out.println("Se ha creado un COCHE nuevo");
+			añadirVehiculo(c4);
+
+		} else {
+			int cilindrada = Integer.parseInt(dato);
+			Motos m5 = new Motos(matricula, KM, cilindrada);
+			System.out.println("Se ha creado una MOTO nueva");
+			añadirVehiculo(m5);
+
+		}
+		return false;
 	}
 
 }
