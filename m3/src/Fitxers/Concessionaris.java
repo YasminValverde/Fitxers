@@ -7,9 +7,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Comparator;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -84,7 +85,7 @@ public class Concessionaris {
 	}
 
 	// ------Metodo EX3---------//
-	public String LeerFitxero(String nomFitxer) throws IOException, FileNotFoundException, MatriculaInvalidaException {
+	public String cargarCSV(String nomFitxer) throws IOException, FileNotFoundException, MatriculaInvalidaException {
 		File fitxer = new File(nomFitxer);
 		FileReader fReader = null; // Lector del fitxer
 		BufferedReader bReader = null; // Buffer
@@ -105,6 +106,10 @@ public class Concessionaris {
 		while ((linea = bReader.readLine()) != null) {
 			String string = linea;
 			String[] parts = string.split(";");
+			if (parts.length < 4) {
+				continue;
+			}
+
 			String tipo = parts[0].trim();
 			String matricula = parts[1].trim();
 			String km = parts[2].trim();
@@ -128,28 +133,28 @@ public class Concessionaris {
 		return nomFitxer;
 	}
 
-	public void guardarXML() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.print("Introduce el nombre del archivo XML: ");
-		String nomFitxer = scanner.nextLine();
-
+	public void guardarXML(String nomFitxer) {
 		try (XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(nomFitxer + ".xml")))) {
-			encoder.writeObject(this.vehicles); // Guarda el objeto Concessionaris completo
+			for (Vehicles vehicles2 : vehicles) {
+				encoder.writeObject(vehicles2);// Guarda los vehiculos
+			}
+
 			System.out.println("Lista  guardada en " + nomFitxer + ".xml correctamente.");
 		} catch (IOException e) {
 			System.out.println("Error al guardar el archivo XML: " + e.getMessage());
 		}
 	}
 
-	public void guardarCSV() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.print("Introduce el nombre del archivo XML: ");
-		String nomFitxer = scanner.nextLine();
-		try (XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(nomFitxer + ".xml")))) {
-			encoder.writeObject(this.vehicles); // Guarda el objeto Concessionaris completo
-			System.out.println("Lista  guardada en " + nomFitxer + ".xml correctamente.");
+	public void guardarCSV(String nomFitxer) {
+		boolean append = false;
+		try (PrintWriter pWriter = new PrintWriter(new FileWriter(nomFitxer + ".txt", append))) {
+			for (Vehicles v : vehicles) {
+				pWriter.println(v);
+			}
+
+			System.out.println("Lista  guardada en " + nomFitxer + ".txt correctamente.");
 		} catch (IOException e) {
-			System.out.println("Error al guardar el archivo XML: " + e.getMessage());
+			System.out.println("Error al guardar el archivo CSV: " + e.getMessage());
 		}
 
 	}

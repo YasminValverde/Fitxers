@@ -1,54 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="17.0.6" class="java.beans.XMLDecoder">
- <object class="java.util.TreeSet">
-  <void method="add">
-   <object class="Fitxers.Motos">
-    <void property="cilindrada">
-     <int>700</int>
-    </void>
-    <void property="km">
-     <int>110000</int>
-    </void>
-    <void property="matricula">
-     <string>1934BXR</string>
-    </void>
-   </object>
+ <object class="Fitxers.Cotxes">
+  <void property="esClassic">
+   <boolean>true</boolean>
   </void>
-  <void method="add">
-   <object class="Fitxers.Cotxes">
-    <void property="esClassic">
-     <boolean>true</boolean>
-    </void>
-    <void property="km">
-     <int>110000</int>
-    </void>
-    <void property="matricula">
-     <string>3205HLK</string>
-    </void>
-   </object>
+  <void property="km">
+   <int>25000</int>
   </void>
-  <void method="add">
-   <object class="Fitxers.Motos">
-    <void property="cilindrada">
-     <int>500</int>
-    </void>
-    <void property="km">
-     <int>10000</int>
-    </void>
-    <void property="matricula">
-     <string>4821ZMT</string>
-    </void>
-   </object>
+  <void property="matricula">
+   <string>2345JKL</string>
   </void>
-  <void method="add">
-   <object class="Fitxers.Cotxes">
-    <void property="km">
-     <int>110000</int>
-    </void>
-    <void property="matricula">
-     <string>7650NPS</string>
-    </void>
-   </object>
+ </object>
+ <object class="Fitxers.Motos">
+  <void property="cilindrada">
+   <int>300</int>
+  </void>
+  <void property="km">
+   <int>40000</int>
+  </void>
+  <void property="matricula">
+   <string>4567BRT</string>
+  </void>
+ </object>
+ <object class="Fitxers.Motos">
+  <void property="cilindrada">
+   <int>700</int>
+  </void>
+  <void property="km">
+   <int>110000</int>
+  </void>
+  <void property="matricula">
+   <string>5678XYZ</string>
+  </void>
+ </object>
+ <object class="Fitxers.Cotxes">
+  <void property="km">
+   <int>110000</int>
+  </void>
+  <void property="matricula">
+   <string>7283FLC</string>
   </void>
  </object>
 </java>

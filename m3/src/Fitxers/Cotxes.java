@@ -2,10 +2,15 @@ package Fitxers;
 
 public class Cotxes extends Vehicles {
 	private boolean esClassic;
+	/*
+	 * private static int contador = 0; private int numero; // numero único para
+	 * cada coche
+	 */
 
 	public Cotxes(String matricula, int km, boolean esClassic) throws MatriculaInvalidaException {
 		super(matricula, km);
 		this.esClassic = esClassic;
+		/* this.numero = ++contador; */
 	}
 
 	public Cotxes() {
@@ -43,7 +48,7 @@ public class Cotxes extends Vehicles {
 
 	@Override
 	public String toString() {
-		return "Cotxes [esClassic=" + esClassic + ", matricula=" + matricula + ", km=" + km + "]";
+		return "Cotxes [MATRICULA =" + matricula + ", KM=" + km + ", ES_CLASSIC=" + esClassic + "]";
 	}
 
 }

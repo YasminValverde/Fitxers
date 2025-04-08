@@ -2,10 +2,15 @@ package Fitxers;
 
 public class Motos extends Vehicles {
 	private int cilindrada;
+	/*
+	 * private static int contador = 0; private int numero; // numero único para
+	 * cada moto
+	 */
 
 	public Motos(String matricula, int km, int cilindrada) throws MatriculaInvalidaException {
 		super(matricula, km);
 		this.cilindrada = cilindrada;
+		/* this.numero = ++contador; */
 	}
 
 	public int getCilindrada() {
@@ -47,7 +52,7 @@ public class Motos extends Vehicles {
 
 	@Override
 	public String toString() {
-		return "Motos [cilindrada=" + cilindrada + ", matricula=" + matricula + ", km=" + km + "]";
+		return "Moto [MATRICULA=" + matricula + ", KM=" + km + ", CILINDRADA=" + cilindrada + "]";
 	}
 
 }

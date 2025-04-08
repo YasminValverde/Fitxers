@@ -40,7 +40,7 @@ public class Main {
 				System.out.print("Introdueix el nom del fitxer: ");
 				String nomFitxer = scanner.nextLine();
 				try {
-					con1.LeerFitxero(nomFitxer);
+					con1.cargarCSV(nomFitxer);
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -58,7 +58,8 @@ public class Main {
 				con1.mostrarVehicles();
 				break;
 			case 4:
-				System.out.println("Introduce los datos[matricula, km, es classic? / cilindrada]");
+				System.out.println(" ");
+				System.out.print("Introduce los datos[matricula, km, es classic? / cilindrada]: ");
 				String datos = scanner.nextLine();
 				try {
 					con1.añadirVehiculoPorTeclado(datos);
@@ -67,7 +68,7 @@ public class Main {
 				}
 				break;
 			case 5:
-				System.out.println("Introduce la matricula del vehiculo que quieres eliminar: ");
+				System.out.print("Introduce la matricula del vehiculo que quieres eliminar: ");
 				String matricula = scanner.nextLine();
 				if (!con1.quitarVehiculo(matricula)) {
 					System.out.println("NO SE PUEDE ELIMINAR ESE VEHICULO!NO EXISTE!!");
@@ -82,10 +83,14 @@ public class Main {
 				break;
 
 			case 7:
-				con1.guardarXML(); // Deja la lista
+				System.out.print("Introduce el nombre del archivo .txt: ");
+				String nomFitxer_txt = scanner.nextLine();
+				con1.guardarCSV(nomFitxer_txt);
 				break;
 			case 8:
-				con1.guardarXML(); // Convierte el archivo .txt a un archivo xml
+				System.out.print("Introduce el nombre del archivo XML: ");
+				String nomFitxer_xml = scanner.nextLine();
+				con1.guardarXML(nomFitxer_xml);
 				break;
 			case 0:
 				salir = true;
